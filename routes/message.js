@@ -4,7 +4,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const urlencodedParser = bodyParser.urlencoded({
-    extended: false
+	extended: false
 });
 //处理node request请求
 const request = require("request");
@@ -12,24 +12,24 @@ const request = require("request");
 const wx = require("../public/javascripts/wxConfig");
 
 //路由
-router.post('/msgTemplate',urlencodedParser,(req,res)=>{
-	let option={
-		method:"POST",
-		url:wx.url+'/cgi-bin/token?',
-		formData:{
-			appid:wx.appid,
-			secret:wx.secret,
-			grant_type:'client_credential'
+router.post('/msgTemplate', urlencodedParser, (req, res) => {
+	let option = {
+		method: "POST",
+		url: wx.url + '/cgi-bin/token?',
+		formData: {
+			appid: wx.appid,
+			secret: wx.secret,
+			grant_type: 'client_credential'
 		}
 	}
-	request(option,(error,response,body)=>{
+	request(option, (error, response, body) => {
 		if (error) {
 			//请求异常会有返回信息
 			res.json({
-				"code":-1,
-				"status":"操作失败"
+				"code": -1,
+				"status": "操作失败"
 			})
-		}else{
+		} else {
 			// 返回给前端的值
 			let data = JSON.parse(body);
 			console.log(data)
